@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <title>
+        APITestWeb
+    </title>
+    <script type="text/javascript">
+        window.onload = init;
+        function init() {
+            var button = document.getElementById("AjaxRequest");
+            button.onclick = function() {
+                // var userJsonObject = {
+                //     account: document.getElementById("account").value,
+                //     password: document .getElementById("password").value
+                // };
+                // var jsonString = querystring.stringify(userJsonObject);
+                function createQueryString(){
+                    account=document.getElementById("account").value;
+                    password=document.getElementById("password").value;
+                    var queryString="account="+account+"&password="+password;
+                    return queryString;
+                }
+                var queryString=createQueryString();
+                var url = "http://localhost:8080/login";                 //此处填写后台处理脚本
+                var request = new XMLHttpRequest();
+                request.open("POST", url);
+                request.onload = function () {
+                    if (request.status == 200) {
+                        if (request.responseText == 0)
+                            alert("USER_LOGIN_SUCCESS");
+                        if (request.responseText == 1)
+                            alert("USER_LOGIN_NOT_MATCH");
+                        if (request.responseText == 2)
+                            alert("USER_LOGIN_EMAIL_DUPLICATE");
+                    }
+                    else {
+                        alert("Request Error");
+                    }
+                };
+                request.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+                alert(queryString);
+                request.send(queryString);
+
+            };
+        }
+    </script>
+</head>
+<body>
+
+<form action="http://localhost:8080/login" method="POST">           <!-- 这里填写处理脚本url -->
+    <p>account</p>
+    <input type="text" name="account" id="account">
+    <p>Password</p>
+    <input type="text" name="password" id="password">
+    <input type="submit" value="submit">
+    <input type="button" name="AjaxButton" id="AjaxRequest" value="AjaxRequest">
+</form>
+
+</body>
+</html>
