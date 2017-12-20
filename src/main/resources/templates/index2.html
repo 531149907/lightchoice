@@ -22,7 +22,7 @@
                     return queryString;
                 }
                 var queryString=createQueryString();
-                var url = "http://localhost:8080/login";                 //此处填写后台处理脚本
+                var url = "login";                 //此处填写后台处理脚本
                 var request = new XMLHttpRequest();
                 request.open("POST", url);
                 request.onload = function () {
@@ -48,7 +48,7 @@
 </head>
 <body>
 
-<form action="http://localhost:8080/login" method="POST">           <!-- 这里填写处理脚本url -->
+<form action="login" method="POST">           <!-- 这里填写处理脚本url -->
     <p>account</p>
     <input type="text" name="account" id="account">
     <p>Password</p>

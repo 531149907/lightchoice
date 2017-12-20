@@ -27,7 +27,6 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
     public int loginUser(String account, String password, HttpSession session) {
-        System.out.println(account+" || "+password);
         int verifyResult = userService.verifyLoginUser(account, password);
         if (verifyResult == Constant.USER_LOGIN_SUCCESS) {
             session.setAttribute("userEntity", userService.getUser(account));
